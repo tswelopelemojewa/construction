@@ -1,0 +1,20 @@
+
+post http://127.0.0.1:5000/predict
+Content-Type: application/json
+
+{
+    
+    "laborers" : 2,
+    "cash_flow" : 3,
+    "Errors": 1,
+    "communication" : 3,
+    "Change_schedule" : 5,
+    "bid_price" : 3,
+    "scope_change" : 1,
+    "Weather_conditions" : 5,
+    "Accidents" : 4
+    
+}
+
+###
+GET http://127.0.0.1:5000/api/historical_data/

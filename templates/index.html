@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction delay</title>
+    <script src="/static/js/code.js" defer></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body x-data="construction">
+    <div class="container">
+        <br>
+        <div class="">
+        
+            <hr>
+            <h5 class="card-title">DELAYS IN CONSTRUCTION</h5>
+            <!-- <div class="col-md-12 float-end"> -->
+            
+
+            <a href="/" class="btn link-secondary d-flex flex-row-reverse">HOME</a>
+
+            <a href="/about" class=" btn link-secondary d-flex flex-row-reverse ">ABOUT</a>
+            <a href="/contact" class="btn link-secondary d-flex flex-row-reverse">CONTACT US</a>
+
+            <a href="/logout" class="btn link-secondary d-flex flex-row-reverse">SIGN OUT</a>
+            <!-- </div> -->
+            <hr>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h3 class="card-title text-center">PREDICT SEVERITY</h3>
+                        <!-- <a href="/logout" class="link-secondary d-flex flex-row-reverse">SIGN OUT</a> -->
+
+                        <hr>
+                        <div>
+                            <label>laborers</label>
+                            <input class="form-control" type="number" x-model="laborers" placeholder="enter laborers"
+                                required /><br>
+
+                            <label>cash_flow</label>
+                            <input class="form-control" type="number" x-model="cash_flow" placeholder="enter cash_flow"
+                                required /><br>
+
+                            <label>Errors</label>
+                            <input class="form-control" type="number" x-model="Errors" placeholder="enter Errors"
+                                required /><br>
+
+                            <label>Communication</label>
+                            <input class="form-control" type="number" x-model="communication"
+                                placeholder="enter communication" required /><br>
+
+                            <label>Change_schedule</label>
+                            <input class="form-control" type="number" x-model="Change_schedule"
+                                placeholder="enter Change_schedule" required /><br>
+
+                            <label>bid_price</label>
+                            <input class="form-control" type="number" x-model="bid_price" placeholder="enter bid_price"
+                                required /><br>
+
+                            <label>scope_change</label>
+                            <input class="form-control" type="number" x-model="scope_change"
+                                placeholder="enter scope_change" required /><br>
+
+                            <label>Weather_conditions</label>
+                            <input class="form-control" type="number" x-model="Weather_conditions"
+                                placeholder="enter Weather_conditions" required /><br>
+
+                            <label>Accidents</label>
+                            <input class="form-control" type="number" x-model="Accidents" placeholder="enter Accidents"
+                                required /><br>
+
+                            <!-- <h4 x-text="predicted"></h4>
+                            <h2 x-text="show_prediction"></h2> -->
+
+
+                            <template x-if="predicted == 1">
+                                <h4>Delay: NONE</h4>
+                            </template>
+                            <template x-if="predicted == 2">
+                                <h4>Delay: Minimal</h4>
+                            </template>
+                            <template x-if="predicted == 3">
+                                <h4>Delay: Moderate</h4>
+                            </template>
+                            
+                            <template x-if="predicted == 4">
+                                <h4>Delay: Severe</h4>
+                            </template>
+                            
+                            <template x-if="predicted == 5">
+                                <h4>Delay: Very Severe</h4>
+                            </template>
+                            
+
+                            <button class="btn btn-primary" type="submit" @click="MakePrediction()">PREDICT</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <h3>View Historical data</h3>
+        <br>
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>
+                        Delay
+                    </th>
+                    <th>
+                        laborers
+                    </th>
+                    <th>
+                        cash_flow
+                    </th>
+
+                    <th>
+                        Errors
+                    </th>
+
+                    <th>
+                        Communication
+                    </th>
+                    <th>
+                        Change_schedule
+                    </th>
+                    <th>
+                        bid_price
+                    </th>
+                    <th>
+                        scope_change
+                    </th>
+                    <th>
+                        Weather_conditions
+                    </th>
+                    <th>
+                        Accidents
+                    </th>
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <template x-for="x in hist">
+                    <tr>
+                        <td x-text="x.Delay"></td>
+                        <td x-text="x.laborers"></td>
+                        <td x-text="x.cash_flow"></td>
+                        <td x-text="x.Errors"></td>
+                        <td x-text="x.Communication"></td>
+                        <td x-text="x.Change_schedule"></td>
+                        <td x-text="x.bid_price"></td>
+                        <td x-text="x.scope_change"></td>
+                        <td x-text="x.Weather_conditions"></td>
+                        <td x-text="x.Accidents"></td>
+                    </tr>
+                </template>
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
